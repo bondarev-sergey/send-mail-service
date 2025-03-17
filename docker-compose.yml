@@ -1,17 +1,18 @@
 services:
-  postfix:
-    image: mailcow/postfix
-    container_name: postfix
-    environment:
-      - maildomain=localhost
-    ports:
-      - "25:25"
-    networks:
-      - mail-network
+#  postfix:
+#    image: mailcow/postfix
+#    container_name: postfix
+#    environment:
+#      - maildomain=localhost
+#    ports:
+#      - "25:25"
+#    networks:
+#      - mail-network
 
   mailhog:
     image: mailhog/mailhog
     container_name: mailhog
+    restart: always
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -22,7 +23,7 @@ services:
     image: send-mail-service
     container_name: spring-boot-app
     depends_on:
-      - postfix
+#      - postfix
       - mailhog
     ports:
       - "8080:8080"

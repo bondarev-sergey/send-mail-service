@@ -27,13 +27,14 @@ public class EmailController {
 
     @PostMapping
     ResponseEntity<Void> sendMail(
+            String from,
             String to,
             String subject,
             String body,
             List<MultipartFile> attachments) throws MessagingException, IOException {
         LOG.info("Sending email to {}", to);
 
-        emailService.send(to, subject, body, attachments);
+        emailService.send(from, to, subject, body, attachments);
         return ResponseEntity.ok().build();
     }
 
